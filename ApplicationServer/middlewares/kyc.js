@@ -27,22 +27,6 @@ async function handleAccountCreation(username){
     sendWelcomeEmail(userData[0].email,Account);
 }
 
-function loadKycFromFile() {
-    if (fs.existsSync(sessionsFilePath)) {
-        const data = fs.readFileSync(sessionsFilePath, 'utf8');
-        try {
-            kyc = JSON.parse(data);
-        } catch (error) {
-        }
-    }
-}
-function saveKycToFile() {
-    const directory = path.dirname(sessionsFilePath);
-    if (!fs.existsSync(directory)) {
-        fs.mkdirSync(directory, { recursive: true });
-    }
-    fs.writeFileSync(sessionsFilePath, JSON.stringify(kyc, null, 2), 'utf8');
-}
 function startKycCleanup() {
     setInterval(() => {
         const now = Date.now();
@@ -61,9 +45,7 @@ function startKycCleanup() {
 function storeKyc(username) {
     const expiration = Date.now() + 10000;
     kyc[username] = { expires: expiration };
-    saveKycToFile();
 }
-loadKycFromFile();
 module.exports={
     startKycCleanup,
     saveKycToFile,
