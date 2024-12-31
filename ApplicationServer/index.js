@@ -24,10 +24,7 @@ startKycCleanup();
 
 //Middlewares
 app.use(express.json())
-app.use(cors({
-    origin: 'https://swift-bank-ayush.vercel.app',
-    credentials: true,
-}));
+app.use(cors({credentials: true}));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({
