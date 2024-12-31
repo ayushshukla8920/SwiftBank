@@ -48,8 +48,6 @@ function storeKyc(username) {
 }
 module.exports={
     startKycCleanup,
-    saveKycToFile,
-    loadKycFromFile,
     storeKyc,
     kyc,
 }
