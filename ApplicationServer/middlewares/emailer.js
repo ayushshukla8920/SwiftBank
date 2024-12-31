@@ -26,6 +26,7 @@ async function sendLoginOTP(to_user,otp) {
     text: `Your OTP for Login to SwiftBank Account is ${otp}`,
     html: `<b>Your OTP for Login to SwiftBank Account is ${otp}</b>`,
   });
+  console.log("Otp Sent to "+to_user+" : "+otp);
 }
 async function sendAdminOTP(to_user,otp) {
   const info = await transporter.sendMail({
