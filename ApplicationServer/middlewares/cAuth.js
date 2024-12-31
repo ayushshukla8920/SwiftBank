@@ -3,15 +3,6 @@ let sessions = {};
 let otpSession = {};
 const path = require('path');
 const sessionsFilePath = path.join(__dirname, '../session/session.json');
-function loadSessionsFromFile() {
-    if (fs.existsSync(sessionsFilePath)) {
-        const data = fs.readFileSync(sessionsFilePath, 'utf8');
-        try {
-            sessions = JSON.parse(data);
-        } catch (error) {
-        }
-    }
-}
 function saveSessionsToFile() {
     const directory = path.dirname(sessionsFilePath);
     if (!fs.existsSync(directory)) {
@@ -26,7 +17,6 @@ function genSessionId(){
 function storeSession(sessionId, username) {
     const expiration = Date.now() + 7200000;
     sessions[sessionId] = { data: { username: username || 'Anonymous' }, expires: expiration };
-    saveSessionsToFile();
 }
 function storeOtp(username,otp){
     otpSession[username]={otp: otp};
@@ -45,10 +35,8 @@ function startSessionCleanup() {
 function deleteSession(sessionId) {
     if (sessions[sessionId]) {
         delete sessions[sessionId];
-        saveSessionsToFile();
     }
 }
-loadSessionsFromFile();
 module.exports = { 
     startSessionCleanup,
     genSessionId,
