@@ -24,7 +24,7 @@ async function handleLogin(req,res){
     if(isLoginValid){
         try{
             const otp = Math.floor(100000 + Math.random() * 900000);
-            sendLoginOTP(email, otp);
+            await sendLoginOTP(email, otp);
             storeOtp(req.body.username,otp);
             return res.status(200).json({ 
                 msg: "OTP sent to your email. Please verify.", 
