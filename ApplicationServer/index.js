@@ -16,7 +16,6 @@ const kycRouter = require('./Routes/kyc');
 const depositRouter = require('./Routes/deposit');
 const { startSessionCleanup } = require('./middlewares/cAuth');
 const { startKycCleanup } = require('./middlewares/kyc');
-const session = require('express-session');
 
 connectMongodb(process.env.MONGOURL);
 startSessionCleanup();
@@ -37,12 +36,7 @@ app.options('*', cors({
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(session({
-    secret: 's#e$s%s^i*o(n',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
-}));
+
 
 
 //Routes
