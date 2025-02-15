@@ -1,1 +1,1 @@
-export const serverURL = "http://localhost:6623";
+export const serverURL = "https://sb-appserver.vercel.app";
